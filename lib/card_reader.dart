@@ -63,6 +63,11 @@ List<NDEFRecord>? _scan(dynamic _) {
     print('done');
     print(result);
 
+    result
+      ..removeWhere((element) => element == 0)
+      ..removeAt(0)
+      ..removeLast();
+
     final messages = decodeRawNdefMessage(Uint8List.fromList(result));
     print(messages);
 

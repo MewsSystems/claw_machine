@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:dart_periphery/dart_periphery.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
