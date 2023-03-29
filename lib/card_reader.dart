@@ -66,7 +66,8 @@ List<NDEFRecord>? _scan(dynamic _) {
     print(messages);
 
     return messages;
-  } on Object {
+  } catch (e) {
+    print(e);
     return null;
   }
 }
