@@ -213,8 +213,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
-      resolved-ref: "37610b9fd5935fdb8d610c8692d42c854b739857"
+      ref: pn532-fix
+      resolved-ref: aa5e7861e9520d4c432eb2f03db5e740fe34b708
       url: "https://github.com/ookami-kb/dart_periphery.git"
     source: git
     version: "0.9.3"

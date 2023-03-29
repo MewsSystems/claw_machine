@@ -11,7 +11,7 @@ dependencies:
   dart_periphery:
     git:
       url: https://github.com/ookami-kb/dart_periphery.git
-      branch: pn532-fix
+      ref: pn532-fix
   fast_immutable_collections: ^9.0.0
   flutter:
     sdk: flutter
