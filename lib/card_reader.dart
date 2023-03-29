@@ -11,6 +11,7 @@ class CardReader {
   bool _isDisposed = false;
 
   Future<void> start(ValueSetter<IList<NDEFRecord>> onScanned) async {
+    print('Starting...');
     while (!_isDisposed) {
       final records = await compute(_scan, null);
       if (records != null && !_isDisposed) {

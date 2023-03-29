@@ -11,12 +11,16 @@ import 'di.dart';
 import 'main_bloc.dart';
 
 Future<void> main() async {
+  print('Starting app...');
   DartPluginRegistrant.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
 
+  print('Initialized.');
+
   if (environment == envRPi) {
     useLocalLibrary(CPU_ARCHITECTURE.arm64);
+    print('Using local library.');
   }
 
   runApp(const MyApp());
