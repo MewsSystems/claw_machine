@@ -27,6 +27,7 @@ class CardReader {
 
 List<NDEFRecord>? _scan(dynamic _) {
   try {
+    useLocalLibrary(CPU_ARCHITECTURE.arm64);
     final p = PN532(pn532ProtocolImpl: PN532I2CImpl())..setSamConfiguration();
 
     final uid = p.getPassivTargetId();

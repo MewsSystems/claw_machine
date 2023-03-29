@@ -18,11 +18,6 @@ Future<void> main() async {
 
   print('Initialized.');
 
-  if (environment == envRPi) {
-    useLocalLibrary(CPU_ARCHITECTURE.arm64);
-    print('Using local library.');
-  }
-
   runApp(const MyApp());
 }
 
