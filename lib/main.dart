@@ -7,6 +7,7 @@ import 'package:ndef/ndef.dart';
 
 import 'card_reader.dart';
 import 'di.dart';
+import 'game_starter.dart';
 import 'main_bloc.dart';
 
 Future<void> main() async {
@@ -48,6 +49,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late final CardReader _cardReader;
+  final _gameStarter = sl<GameStarter>();
 
   @override
   void initState() {
@@ -78,23 +80,28 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              BlocBuilder<MainBloc, MainState>(
-                builder: (context, state) => Text(state.toString()),
-              ),
-            ],
+  Widget build(BuildContext context) => BlocListener<MainBloc, MainState>(
+        listener: (context, state) => state.mapOrNull(gameStarted: (_) {
+          _gameStarter.start();
+        }),
+        child: Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                BlocBuilder<MainBloc, MainState>(
+                  builder: (context, state) => Text(state.toString()),
+                ),
+              ],
+            ),
           ),
+          floatingActionButton: environment == envSimulator
+              ? FloatingActionButton(
+                  onPressed: _handleStubButtonPressed,
+                  tooltip: 'Increment',
+                  child: const Icon(Icons.add),
+                )
+              : null,
         ),
-        floatingActionButton: environment == envSimulator
-            ? FloatingActionButton(
-                onPressed: _handleStubButtonPressed,
-                tooltip: 'Increment',
-                child: const Icon(Icons.add),
-              )
-            : null,
       );
 }

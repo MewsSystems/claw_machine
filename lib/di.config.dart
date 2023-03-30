@@ -10,12 +10,13 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:claw_machine/card_reader.dart' as _i3;
-import 'package:claw_machine/di.dart' as _i7;
-import 'package:claw_machine/main_bloc.dart' as _i6;
+import 'package:claw_machine/di.dart' as _i8;
+import 'package:claw_machine/game_starter.dart' as _i5;
+import 'package:claw_machine/main_bloc.dart' as _i7;
 import 'package:claw_machine/stub_card_reader.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:shared_preferences/shared_preferences.dart' as _i5;
+import 'package:shared_preferences/shared_preferences.dart' as _i6;
 
 const String _rpi = 'rpi';
 const String _simulator = 'simulator';
@@ -40,13 +41,17 @@ extension GetItInjectableX on _i1.GetIt {
       () => _i4.StubCardReader(),
       registerFor: {_simulator},
     );
-    await gh.factoryAsync<_i5.SharedPreferences>(
+    gh.factory<_i5.GameStarter>(
+      () => _i5.GameStarter(),
+      registerFor: {_rpi},
+    );
+    await gh.factoryAsync<_i6.SharedPreferences>(
       () => appModule.prefs,
       preResolve: true,
     );
-    gh.factory<_i6.MainBloc>(() => _i6.MainBloc(gh<_i5.SharedPreferences>()));
+    gh.factory<_i7.MainBloc>(() => _i7.MainBloc(gh<_i6.SharedPreferences>()));
     return this;
   }
 }
 
-class _$AppModule extends _i7.AppModule {}
+class _$AppModule extends _i8.AppModule {}
