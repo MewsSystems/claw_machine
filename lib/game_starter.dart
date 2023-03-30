@@ -9,8 +9,12 @@ import 'di.dart';
 @Injectable(env: [envRPi])
 class GameStarter {
   GameStarter() {
-    useLocalLibrary(CPU_ARCHITECTURE.arm64);
-    GPIO(4, GPIOdirection.gpioDirOut).write(true);
+    try {
+      useLocalLibrary(CPU_ARCHITECTURE.arm64);
+      GPIO(4, GPIOdirection.gpioDirOut).write(true);
+    } catch (e) {
+      print(e);
+    }
   }
 
   void start() => compute(_startGame, null);
