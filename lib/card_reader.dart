@@ -52,8 +52,13 @@ List<NDEFRecord>? _scan(dynamic _) {
         final data = p.mifareClassicReadBlock(Uint8(i));
         print(data);
 
-        if (data.every((element) => element == 0)) break;
         result.addAll(data);
+
+        final stop = data.indexOf(254);
+        if (stop != -1) {
+          print('Found stop');
+          break;
+        }
       } catch (e) {
         print(e);
         break;
@@ -66,8 +71,7 @@ List<NDEFRecord>? _scan(dynamic _) {
     result
       ..removeWhere((element) => element == 0)
       ..removeAt(0)
-      ..removeAt(0)
-      ..removeLast();
+      ..removeAt(0);
     print(result);
 
     final messages = decodeRawNdefMessage(Uint8List.fromList(result));
