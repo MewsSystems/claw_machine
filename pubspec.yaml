@@ -16,19 +16,41 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
+  flutter_gen: ^5.2.0
+  flutter_screenutil: ^5.7.0
+  flutter_svg: 2.0.1
   freezed_annotation: ^2.2.0
   get_it: ^7.2.0
   injectable: ^2.1.1
   ndef: ^0.3.1
+  rive: ^0.10.3
   shared_preferences: ^2.0.20
 
 dev_dependencies:
   build_runner: ^2.3.3
+  flutter_gen_runner: ^5.2.0
   flutter_test:
     sdk: flutter
   freezed: ^2.3.2
   injectable_generator: ^2.1.5
   mews_pedantic: ^0.13.0
 
+dependency_overrides:
+  vector_graphics_compiler: 1.0.1
+
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/animations/
+
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter.ttf
+
+flutter_gen:
+  integrations:
+    flutter_svg: true
+    rive: true

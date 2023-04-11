@@ -34,16 +34,20 @@ extension GetItInjectableX on _i1.GetIt {
     );
     final appModule = _$AppModule();
     gh.factory<_i3.CardReader>(
-      () => _i3.CardReader(),
-      registerFor: {_rpi},
-    );
-    gh.factory<_i3.CardReader>(
       () => _i4.StubCardReader(),
       registerFor: {_simulator},
+    );
+    gh.factory<_i3.CardReader>(
+      () => _i3.CardReader(),
+      registerFor: {_rpi},
     );
     gh.factory<_i5.GameStarter>(
       () => _i5.GameStarter(),
       registerFor: {_rpi},
+    );
+    gh.factory<_i5.GameStarter>(
+      () => _i5.StubGameStarter(),
+      registerFor: {_simulator},
     );
     await gh.factoryAsync<_i6.SharedPreferences>(
       () => appModule.prefs,

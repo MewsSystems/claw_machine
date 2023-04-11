@@ -41,3 +41,9 @@ Future<void> _startGame(dynamic _) async {
     print(e);
   }
 }
+
+@Injectable(env: [envSimulator], as: GameStarter)
+class StubGameStarter implements GameStarter {
+  @override
+  void start() {}
+}
