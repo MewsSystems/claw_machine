@@ -1,7 +1,7 @@
 build_rpi:
 	flutter build linux --dart-define env=rpi
 
-stop_service:
+start_service:
 	sudo systemctl start claw.service
 
 stop_service:
