@@ -14,10 +14,12 @@ class GameInProgressScreen extends StatelessWidget {
           SizedBox(height: 24.r),
           Text('Game is on', style: labelTop.copyWith(fontSize: 36.r)),
           SizedBox(height: 24.r),
-          SizedBox(
-            width: 106.5.r,
-            height: 233.r,
-            child: Assets.animations.claw.rive(),
+          RepaintBoundary(
+            child: SizedBox(
+              width: 106.5.r,
+              height: 233.r,
+              child: Assets.animations.claw.rive(),
+            ),
           )
         ],
       );

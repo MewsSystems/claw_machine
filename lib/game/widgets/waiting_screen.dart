@@ -12,10 +12,12 @@ class WaitingScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(height: 45.r),
-          SizedBox(
-            width: 112.r,
-            height: 84.r,
-            child: Assets.animations.cardAnimation.rive(),
+          RepaintBoundary(
+            child: SizedBox(
+              width: 112.r,
+              height: 84.r,
+              child: Assets.animations.cardAnimation.rive(),
+            ),
           ),
           SizedBox(height: 32.r),
           Text(
