@@ -16,19 +16,13 @@ class AttemptsScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(height: 32.r),
-          Text(
-            'You have',
-            style: labelTop,
-          ),
+          Text('You have', style: labelTop),
           Text(
             attempts == null ? '∞' : attempts.toString(),
             style: digit,
           ),
           SizedBox(height: 8.r),
-          Text(
-            'games left',
-            style: labelBottom,
-          ),
+          Text('games left', style: labelBottom),
         ],
       );
 }

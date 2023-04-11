@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+const designSize = Size(320, 480);
+
 const backgroundColor = Color(0xFF1C1D29);
 const primaryColor = Color(0xFF6C69E8);
 const noGamesColor = Color(0xFFF78F77);

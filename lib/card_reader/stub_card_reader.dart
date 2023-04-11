@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ndef/record.dart';
 
+import '../di.dart';
 import 'card_reader.dart';
-import 'di.dart';
 
 @Injectable(as: CardReader, env: [envSimulator])
 class StubCardReader implements CardReader {

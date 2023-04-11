@@ -3,8 +3,11 @@ import 'dart:io';
 import 'package:dart_periphery/dart_periphery.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logging/logging.dart';
 
-import 'di.dart';
+import '../di.dart';
+
+final _logger = Logger((GameStarter).toString());
 
 @Injectable(env: [envRPi])
 class GameStarter {
@@ -14,8 +17,8 @@ class GameStarter {
       GPIO(4, GPIOdirection.gpioDirOut)
         ..write(true)
         ..dispose();
-    } catch (e) {
-      print(e);
+    } on Object catch (e, stacktrace) {
+      _logger.severe('Failed to initialize.', e, stacktrace);
     }
   }
 
@@ -26,24 +29,16 @@ Future<void> _startGame(dynamic _) async {
   try {
     useLocalLibrary(CPU_ARCHITECTURE.arm64);
 
-    final gpio = GPIO(4, GPIOdirection.gpioDirOut);
-
-    gpio.write(false);
+    final gpio = GPIO(4, GPIOdirection.gpioDirOut)..write(false);
     sleep(const Duration(milliseconds: 10));
     gpio.write(true);
     sleep(const Duration(milliseconds: 200));
     gpio.write(false);
     sleep(const Duration(milliseconds: 100));
-    gpio.write(true);
-
-    gpio.dispose();
-  } catch (e) {
-    print(e);
+    gpio
+      ..write(true)
+      ..dispose();
+  } on Object catch (e, stacktrace) {
+    _logger.severe('Failed to start game.', e, stacktrace);
   }
-}
-
-@Injectable(env: [envSimulator], as: GameStarter)
-class StubGameStarter implements GameStarter {
-  @override
-  void start() {}
 }

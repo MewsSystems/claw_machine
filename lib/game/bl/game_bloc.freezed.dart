@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'main_bloc.dart';
+part of 'game_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,22 +15,25 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$MainEvent {
+mixin _$GameEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(IList<NDEFRecord> records) scanned,
+    required TResult Function(String code) reset,
     required TResult Function() finished,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(IList<NDEFRecord> records)? scanned,
+    TResult? Function(String code)? reset,
     TResult? Function()? finished,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(IList<NDEFRecord> records)? scanned,
+    TResult Function(String code)? reset,
     TResult Function()? finished,
     required TResult orElse(),
   }) =>
@@ -38,18 +41,21 @@ mixin _$MainEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Scanned value) scanned,
+    required TResult Function(Reset value) reset,
     required TResult Function(Finished value) finished,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Scanned value)? scanned,
+    TResult? Function(Reset value)? reset,
     TResult? Function(Finished value)? finished,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Scanned value)? scanned,
+    TResult Function(Reset value)? reset,
     TResult Function(Finished value)? finished,
     required TResult orElse(),
   }) =>
@@ -57,15 +63,15 @@ mixin _$MainEvent {
 }
 
 /// @nodoc
-abstract class $MainEventCopyWith<$Res> {
-  factory $MainEventCopyWith(MainEvent value, $Res Function(MainEvent) then) =
-      _$MainEventCopyWithImpl<$Res, MainEvent>;
+abstract class $GameEventCopyWith<$Res> {
+  factory $GameEventCopyWith(GameEvent value, $Res Function(GameEvent) then) =
+      _$GameEventCopyWithImpl<$Res, GameEvent>;
 }
 
 /// @nodoc
-class _$MainEventCopyWithImpl<$Res, $Val extends MainEvent>
-    implements $MainEventCopyWith<$Res> {
-  _$MainEventCopyWithImpl(this._value, this._then);
+class _$GameEventCopyWithImpl<$Res, $Val extends GameEvent>
+    implements $GameEventCopyWith<$Res> {
+  _$GameEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -83,7 +89,7 @@ abstract class _$$ScannedCopyWith<$Res> {
 
 /// @nodoc
 class __$$ScannedCopyWithImpl<$Res>
-    extends _$MainEventCopyWithImpl<$Res, _$Scanned>
+    extends _$GameEventCopyWithImpl<$Res, _$Scanned>
     implements _$$ScannedCopyWith<$Res> {
   __$$ScannedCopyWithImpl(_$Scanned _value, $Res Function(_$Scanned) _then)
       : super(_value, _then);
@@ -112,7 +118,7 @@ class _$Scanned implements Scanned {
 
   @override
   String toString() {
-    return 'MainEvent.scanned(records: $records)';
+    return 'GameEvent.scanned(records: $records)';
   }
 
   @override
@@ -137,6 +143,7 @@ class _$Scanned implements Scanned {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(IList<NDEFRecord> records) scanned,
+    required TResult Function(String code) reset,
     required TResult Function() finished,
   }) {
     return scanned(records);
@@ -146,6 +153,7 @@ class _$Scanned implements Scanned {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(IList<NDEFRecord> records)? scanned,
+    TResult? Function(String code)? reset,
     TResult? Function()? finished,
   }) {
     return scanned?.call(records);
@@ -155,6 +163,7 @@ class _$Scanned implements Scanned {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(IList<NDEFRecord> records)? scanned,
+    TResult Function(String code)? reset,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
@@ -168,6 +177,7 @@ class _$Scanned implements Scanned {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Scanned value) scanned,
+    required TResult Function(Reset value) reset,
     required TResult Function(Finished value) finished,
   }) {
     return scanned(this);
@@ -177,6 +187,7 @@ class _$Scanned implements Scanned {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Scanned value)? scanned,
+    TResult? Function(Reset value)? reset,
     TResult? Function(Finished value)? finished,
   }) {
     return scanned?.call(this);
@@ -186,6 +197,7 @@ class _$Scanned implements Scanned {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Scanned value)? scanned,
+    TResult Function(Reset value)? reset,
     TResult Function(Finished value)? finished,
     required TResult orElse(),
   }) {
@@ -196,13 +208,148 @@ class _$Scanned implements Scanned {
   }
 }
 
-abstract class Scanned implements MainEvent {
+abstract class Scanned implements GameEvent {
   const factory Scanned(final IList<NDEFRecord> records) = _$Scanned;
 
   IList<NDEFRecord> get records;
   @JsonKey(ignore: true)
   _$$ScannedCopyWith<_$Scanned> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ResetCopyWith<$Res> {
+  factory _$$ResetCopyWith(_$Reset value, $Res Function(_$Reset) then) =
+      __$$ResetCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String code});
+}
+
+/// @nodoc
+class __$$ResetCopyWithImpl<$Res> extends _$GameEventCopyWithImpl<$Res, _$Reset>
+    implements _$$ResetCopyWith<$Res> {
+  __$$ResetCopyWithImpl(_$Reset _value, $Res Function(_$Reset) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? code = null,
+  }) {
+    return _then(_$Reset(
+      null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$Reset implements Reset {
+  const _$Reset(this.code);
+
+  @override
+  final String code;
+
+  @override
+  String toString() {
+    return 'GameEvent.reset(code: $code)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$Reset &&
+            (identical(other.code, code) || other.code == code));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, code);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ResetCopyWith<_$Reset> get copyWith =>
+      __$$ResetCopyWithImpl<_$Reset>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(IList<NDEFRecord> records) scanned,
+    required TResult Function(String code) reset,
+    required TResult Function() finished,
+  }) {
+    return reset(code);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(IList<NDEFRecord> records)? scanned,
+    TResult? Function(String code)? reset,
+    TResult? Function()? finished,
+  }) {
+    return reset?.call(code);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(IList<NDEFRecord> records)? scanned,
+    TResult Function(String code)? reset,
+    TResult Function()? finished,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset(code);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Scanned value) scanned,
+    required TResult Function(Reset value) reset,
+    required TResult Function(Finished value) finished,
+  }) {
+    return reset(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Scanned value)? scanned,
+    TResult? Function(Reset value)? reset,
+    TResult? Function(Finished value)? finished,
+  }) {
+    return reset?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Scanned value)? scanned,
+    TResult Function(Reset value)? reset,
+    TResult Function(Finished value)? finished,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Reset implements GameEvent {
+  const factory Reset(final String code) = _$Reset;
+
+  String get code;
+  @JsonKey(ignore: true)
+  _$$ResetCopyWith<_$Reset> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -214,7 +361,7 @@ abstract class _$$FinishedCopyWith<$Res> {
 
 /// @nodoc
 class __$$FinishedCopyWithImpl<$Res>
-    extends _$MainEventCopyWithImpl<$Res, _$Finished>
+    extends _$GameEventCopyWithImpl<$Res, _$Finished>
     implements _$$FinishedCopyWith<$Res> {
   __$$FinishedCopyWithImpl(_$Finished _value, $Res Function(_$Finished) _then)
       : super(_value, _then);
@@ -227,7 +374,7 @@ class _$Finished implements Finished {
 
   @override
   String toString() {
-    return 'MainEvent.finished()';
+    return 'GameEvent.finished()';
   }
 
   @override
@@ -243,6 +390,7 @@ class _$Finished implements Finished {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(IList<NDEFRecord> records) scanned,
+    required TResult Function(String code) reset,
     required TResult Function() finished,
   }) {
     return finished();
@@ -252,6 +400,7 @@ class _$Finished implements Finished {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(IList<NDEFRecord> records)? scanned,
+    TResult? Function(String code)? reset,
     TResult? Function()? finished,
   }) {
     return finished?.call();
@@ -261,6 +410,7 @@ class _$Finished implements Finished {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(IList<NDEFRecord> records)? scanned,
+    TResult Function(String code)? reset,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
@@ -274,6 +424,7 @@ class _$Finished implements Finished {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Scanned value) scanned,
+    required TResult Function(Reset value) reset,
     required TResult Function(Finished value) finished,
   }) {
     return finished(this);
@@ -283,6 +434,7 @@ class _$Finished implements Finished {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Scanned value)? scanned,
+    TResult? Function(Reset value)? reset,
     TResult? Function(Finished value)? finished,
   }) {
     return finished?.call(this);
@@ -292,6 +444,7 @@ class _$Finished implements Finished {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Scanned value)? scanned,
+    TResult Function(Reset value)? reset,
     TResult Function(Finished value)? finished,
     required TResult orElse(),
   }) {
@@ -302,12 +455,12 @@ class _$Finished implements Finished {
   }
 }
 
-abstract class Finished implements MainEvent {
+abstract class Finished implements GameEvent {
   const factory Finished() = _$Finished;
 }
 
 /// @nodoc
-mixin _$MainState {
+mixin _$GameState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() waiting,
@@ -367,15 +520,15 @@ mixin _$MainState {
 }
 
 /// @nodoc
-abstract class $MainStateCopyWith<$Res> {
-  factory $MainStateCopyWith(MainState value, $Res Function(MainState) then) =
-      _$MainStateCopyWithImpl<$Res, MainState>;
+abstract class $GameStateCopyWith<$Res> {
+  factory $GameStateCopyWith(GameState value, $Res Function(GameState) then) =
+      _$GameStateCopyWithImpl<$Res, GameState>;
 }
 
 /// @nodoc
-class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
-    implements $MainStateCopyWith<$Res> {
-  _$MainStateCopyWithImpl(this._value, this._then);
+class _$GameStateCopyWithImpl<$Res, $Val extends GameState>
+    implements $GameStateCopyWith<$Res> {
+  _$GameStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -391,7 +544,7 @@ abstract class _$$WaitingCopyWith<$Res> {
 
 /// @nodoc
 class __$$WaitingCopyWithImpl<$Res>
-    extends _$MainStateCopyWithImpl<$Res, _$Waiting>
+    extends _$GameStateCopyWithImpl<$Res, _$Waiting>
     implements _$$WaitingCopyWith<$Res> {
   __$$WaitingCopyWithImpl(_$Waiting _value, $Res Function(_$Waiting) _then)
       : super(_value, _then);
@@ -404,7 +557,7 @@ class _$Waiting implements Waiting {
 
   @override
   String toString() {
-    return 'MainState.waiting()';
+    return 'GameState.waiting()';
   }
 
   @override
@@ -497,7 +650,7 @@ class _$Waiting implements Waiting {
   }
 }
 
-abstract class Waiting implements MainState {
+abstract class Waiting implements GameState {
   const factory Waiting() = _$Waiting;
 }
 
@@ -510,7 +663,7 @@ abstract class _$$ProcessingCopyWith<$Res> {
 
 /// @nodoc
 class __$$ProcessingCopyWithImpl<$Res>
-    extends _$MainStateCopyWithImpl<$Res, _$Processing>
+    extends _$GameStateCopyWithImpl<$Res, _$Processing>
     implements _$$ProcessingCopyWith<$Res> {
   __$$ProcessingCopyWithImpl(
       _$Processing _value, $Res Function(_$Processing) _then)
@@ -524,7 +677,7 @@ class _$Processing implements Processing {
 
   @override
   String toString() {
-    return 'MainState.processing()';
+    return 'GameState.processing()';
   }
 
   @override
@@ -617,7 +770,7 @@ class _$Processing implements Processing {
   }
 }
 
-abstract class Processing implements MainState {
+abstract class Processing implements GameState {
   const factory Processing() = _$Processing;
 }
 
@@ -629,7 +782,7 @@ abstract class _$$FailureCopyWith<$Res> {
 
 /// @nodoc
 class __$$FailureCopyWithImpl<$Res>
-    extends _$MainStateCopyWithImpl<$Res, _$Failure>
+    extends _$GameStateCopyWithImpl<$Res, _$Failure>
     implements _$$FailureCopyWith<$Res> {
   __$$FailureCopyWithImpl(_$Failure _value, $Res Function(_$Failure) _then)
       : super(_value, _then);
@@ -642,7 +795,7 @@ class _$Failure implements Failure {
 
   @override
   String toString() {
-    return 'MainState.failure()';
+    return 'GameState.failure()';
   }
 
   @override
@@ -735,7 +888,7 @@ class _$Failure implements Failure {
   }
 }
 
-abstract class Failure implements MainState {
+abstract class Failure implements GameState {
   const factory Failure() = _$Failure;
 }
 
@@ -750,7 +903,7 @@ abstract class _$$GameStartedCopyWith<$Res> {
 
 /// @nodoc
 class __$$GameStartedCopyWithImpl<$Res>
-    extends _$MainStateCopyWithImpl<$Res, _$GameStarted>
+    extends _$GameStateCopyWithImpl<$Res, _$GameStarted>
     implements _$$GameStartedCopyWith<$Res> {
   __$$GameStartedCopyWithImpl(
       _$GameStarted _value, $Res Function(_$GameStarted) _then)
@@ -780,7 +933,7 @@ class _$GameStarted implements GameStarted {
 
   @override
   String toString() {
-    return 'MainState.gameStarted(attemptsLeft: $attemptsLeft)';
+    return 'GameState.gameStarted(attemptsLeft: $attemptsLeft)';
   }
 
   @override
@@ -882,7 +1035,7 @@ class _$GameStarted implements GameStarted {
   }
 }
 
-abstract class GameStarted implements MainState {
+abstract class GameStarted implements GameState {
   const factory GameStarted({required final int? attemptsLeft}) = _$GameStarted;
 
   int? get attemptsLeft;
@@ -900,7 +1053,7 @@ abstract class _$$NoAttemptsLeftCopyWith<$Res> {
 
 /// @nodoc
 class __$$NoAttemptsLeftCopyWithImpl<$Res>
-    extends _$MainStateCopyWithImpl<$Res, _$NoAttemptsLeft>
+    extends _$GameStateCopyWithImpl<$Res, _$NoAttemptsLeft>
     implements _$$NoAttemptsLeftCopyWith<$Res> {
   __$$NoAttemptsLeftCopyWithImpl(
       _$NoAttemptsLeft _value, $Res Function(_$NoAttemptsLeft) _then)
@@ -914,7 +1067,7 @@ class _$NoAttemptsLeft implements NoAttemptsLeft {
 
   @override
   String toString() {
-    return 'MainState.noAttemptsLeft()';
+    return 'GameState.noAttemptsLeft()';
   }
 
   @override
@@ -1007,6 +1160,6 @@ class _$NoAttemptsLeft implements NoAttemptsLeft {
   }
 }
 
-abstract class NoAttemptsLeft implements MainState {
+abstract class NoAttemptsLeft implements GameState {
   const factory NoAttemptsLeft() = _$NoAttemptsLeft;
 }

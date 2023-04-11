@@ -19,8 +19,11 @@ class $AssetsAnimationsGen {
   RiveGenImage get cardAnimation =>
       const RiveGenImage('assets/animations/card_animation.riv');
 
+  /// File path: assets/animations/claw.riv
+  RiveGenImage get claw => const RiveGenImage('assets/animations/claw.riv');
+
   /// List of all assets
-  List<RiveGenImage> get values => [cardAnimation];
+  List<RiveGenImage> get values => [cardAnimation, claw];
 }
 
 class $AssetsImagesGen {

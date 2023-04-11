@@ -42,7 +42,7 @@ packages:
     source: hosted
     version: "2.4.0"
   async:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: async
       sha256: bfe67ef28df125b7dddcea62755991f807aa39a2492a23e1550161692950bbe0
@@ -466,7 +466,7 @@ packages:
     source: hosted
     version: "4.8.0"
   logging:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: logging
       sha256: "04094f2eb032cbb06c6f6e8d3607edcfcb0455e2bb6cbc010cb01171dcb64e6d"

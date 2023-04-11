@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../gen/assets.gen.dart';
+import '../../gen/assets.gen.dart';
+import 'styles.dart';
 
 class Screen extends StatelessWidget {
   const Screen({
@@ -20,14 +21,14 @@ class Screen extends StatelessWidget {
         floatingActionButton: floatingActionButton,
         body: Center(
           child: AspectRatio(
-            aspectRatio: 320 / 480,
+            aspectRatio: designSize.aspectRatio,
             child: Padding(
               padding: EdgeInsets.all(16.r),
               child: Container(
                 padding: EdgeInsets.all(24.r),
                 decoration: BoxDecoration(
                   color: color,
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8)).r,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

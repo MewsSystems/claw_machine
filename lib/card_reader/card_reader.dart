@@ -4,14 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ndef/ndef.dart';
 
-import 'di.dart';
+import '../di.dart';
 
 @Injectable(env: [envRPi])
 class CardReader {
   bool _isDisposed = false;
 
   Future<void> start(ValueSetter<IList<NDEFRecord>> onScanned) async {
-    print('Starting...');
     while (!_isDisposed) {
       final records = await compute(_scan, null);
       if (records != null && !_isDisposed) {
@@ -31,14 +30,11 @@ List<NDEFRecord>? _scan(dynamic _) {
     final p = PN532(pn532ProtocolImpl: PN532I2CImpl())..setSamConfiguration();
 
     final uid = p.getPassivTargetId();
-    print(uid);
 
     final List<int> result = [];
 
     for (int i = 4; i < 10; i++) {
-      print(i);
       if ((i + 1) % 4 == 0) {
-        print('Skipping...');
         continue;
       }
 
@@ -50,37 +46,26 @@ List<NDEFRecord>? _scan(dynamic _) {
           [0xD3, 0xF7, 0xD3, 0xF7, 0xD3, 0xF7].map(Uint8.new).toList(),
         );
         final data = p.mifareClassicReadBlock(Uint8(i));
-        print(data);
 
         result.addAll(data);
 
         final stop = data.indexOf(254);
         if (stop != -1) {
-          print('Found stop');
           break;
         }
-      } catch (e) {
-        print(e);
+      } on Object {
         break;
       }
     }
-
-    print('done');
-    print(result);
 
     result
       ..removeWhere((element) => element == 0)
       ..removeAt(0)
       ..removeAt(0)
       ..removeLast();
-    print(result);
 
-    final messages = decodeRawNdefMessage(Uint8List.fromList(result));
-    print(messages);
-
-    return messages;
-  } catch (e) {
-    print(e);
+    return decodeRawNdefMessage(Uint8List.fromList(result));
+  } on Object {
     return null;
   }
 }
