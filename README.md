@@ -2,6 +2,10 @@
 
 Claw machine controller for Raspberry Pi.
 
+## Dependencies Graph
+
+![Dependencies Graph](deps.png)
+
 ## GameBloc State Machine
 
 ```mermaid

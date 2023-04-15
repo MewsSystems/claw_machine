@@ -35,6 +35,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.3.2
   injectable_generator: ^2.1.5
+  lakos: ^2.0.1
   mews_pedantic: ^0.13.0
 
 dependency_overrides:

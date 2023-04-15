@@ -1,0 +1,90 @@
+digraph "" {
+  graph [style=rounded fontname="Arial Black" fontsize=13 penwidth=2.6];
+  node [shape=rect style="filled,rounded" fontname=Arial fontsize=15 fillcolor=Lavender penwidth=1.3];
+  edge [penwidth=1.3];
+  "/card_reader/stub_card_reader.dart" [label="stub_card_reader"];
+  "/card_reader/card_reader.dart" [label="card_reader"];
+  "/game/bl/game_bloc.dart" [label="game_bloc"];
+  "/game/game_screen.dart" [label="game_screen"];
+  "/game/widgets/failure_screen.dart" [label="failure_screen"];
+  "/game/widgets/game_in_progress_screen.dart" [label="game_in_progress_screen"];
+  "/game/widgets/styles.dart" [label="styles"];
+  "/game/widgets/waiting_screen.dart" [label="waiting_screen"];
+  "/game/widgets/attempts_screen.dart" [label="attempts_screen"];
+  "/game/widgets/game_started_screen.dart" [label="game_started_screen"];
+  "/game/widgets/screen.dart" [label="screen"];
+  "/main.dart" [label="main"];
+  "/simulator/simulator.dart" [label="simulator"];
+  "/game_over_listener/stub_game_over_listener.dart" [label="stub_game_over_listener"];
+  "/game_over_listener/game_over_listener.dart" [label="game_over_listener"];
+  "/game_starter/game_starter.dart" [label="game_starter"];
+  "/game_starter/stub_game_starter.dart" [label="stub_game_starter"];
+  subgraph "cluster~" {
+    label="lib";
+    "/main.dart";
+    subgraph "cluster~/card_reader" {
+      label="card_reader";
+      "/card_reader/stub_card_reader.dart";
+      "/card_reader/card_reader.dart";
+    }
+    subgraph "cluster~/game" {
+      label="game";
+      "/game/game_screen.dart";
+      subgraph "cluster~/game/bl" {
+        label="bl";
+        "/game/bl/game_bloc.dart";
+      }
+      subgraph "cluster~/game/widgets" {
+        label="widgets";
+        "/game/widgets/failure_screen.dart";
+        "/game/widgets/game_in_progress_screen.dart";
+        "/game/widgets/styles.dart";
+        "/game/widgets/waiting_screen.dart";
+        "/game/widgets/attempts_screen.dart";
+        "/game/widgets/game_started_screen.dart";
+        "/game/widgets/screen.dart";
+      }
+    }
+    subgraph "cluster~/simulator" {
+      label="simulator";
+      "/simulator/simulator.dart";
+    }
+    subgraph "cluster~/game_over_listener" {
+      label="game_over_listener";
+      "/game_over_listener/stub_game_over_listener.dart";
+      "/game_over_listener/game_over_listener.dart";
+    }
+    subgraph "cluster~/game_starter" {
+      label="game_starter";
+      "/game_starter/game_starter.dart";
+      "/game_starter/stub_game_starter.dart";
+    }
+  }
+  "/card_reader/stub_card_reader.dart" -> "/card_reader/card_reader.dart";
+  "/game/bl/game_bloc.dart" -> "/game_over_listener/game_over_listener.dart";
+  "/game/game_screen.dart" -> "/card_reader/card_reader.dart";
+  "/game/game_screen.dart" -> "/game_starter/game_starter.dart";
+  "/game/game_screen.dart" -> "/game/bl/game_bloc.dart";
+  "/game/game_screen.dart" -> "/game/widgets/attempts_screen.dart";
+  "/game/game_screen.dart" -> "/game/widgets/failure_screen.dart";
+  "/game/game_screen.dart" -> "/game/widgets/game_started_screen.dart";
+  "/game/game_screen.dart" -> "/game/widgets/screen.dart";
+  "/game/game_screen.dart" -> "/game/widgets/styles.dart";
+  "/game/game_screen.dart" -> "/game/widgets/waiting_screen.dart";
+  "/game/widgets/failure_screen.dart" -> "/game/widgets/styles.dart";
+  "/game/widgets/game_in_progress_screen.dart" -> "/game/widgets/styles.dart";
+  "/game/widgets/waiting_screen.dart" -> "/game/widgets/styles.dart";
+  "/game/widgets/attempts_screen.dart" -> "/game/widgets/styles.dart";
+  "/game/widgets/game_started_screen.dart" -> "/game/widgets/attempts_screen.dart";
+  "/game/widgets/game_started_screen.dart" -> "/game/widgets/game_in_progress_screen.dart";
+  "/game/widgets/screen.dart" -> "/game/widgets/styles.dart";
+  "/main.dart" -> "/game/bl/game_bloc.dart";
+  "/main.dart" -> "/game/game_screen.dart";
+  "/main.dart" -> "/game/widgets/styles.dart";
+  "/main.dart" -> "/simulator/simulator.dart";
+  "/simulator/simulator.dart" -> "/game/bl/game_bloc.dart";
+  "/game_over_listener/stub_game_over_listener.dart" -> "/game_over_listener/game_over_listener.dart";
+  "/game_starter/stub_game_starter.dart" -> "/game_starter/game_starter.dart";
+  "metrics" [label=" isAcyclic: true \l numNodes: 17  \l numEdges: 25  \l avgDegree: 1.47 \l numOrphans: 0 \l ccd: 55 \l acd: 3.24 \l nccd: 0.95 \l totalSloc: 586 \l avgSloc: 34.47 \l"];
+}
+
