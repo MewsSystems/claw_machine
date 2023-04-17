@@ -14,7 +14,7 @@ class GameStarter {
   GameStarter() {
     try {
       useLocalLibrary(CPU_ARCHITECTURE.arm64);
-      GPIO(21, GPIOdirection.gpioDirOut)
+      GPIO(4, GPIOdirection.gpioDirOut)
         ..write(true)
         ..dispose();
     } on Object catch (e, stacktrace) {
