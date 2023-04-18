@@ -9,7 +9,4 @@ class StubGameOverListener implements GameOverListener {
 
   @override
   void start(void Function() onGameOver) {}
-
-  @override
-  void stop() {}
 }

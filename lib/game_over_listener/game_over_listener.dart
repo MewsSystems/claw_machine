@@ -1,22 +1,38 @@
-import 'package:async/async.dart';
+import 'dart:io';
+
+import 'package:dart_periphery/dart_periphery.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logging/logging.dart';
 
 import '../di.dart';
+
+final _logger = Logger((GameOverListener).toString());
 
 @Injectable(env: [envRPi])
 class GameOverListener {
   GameOverListener();
 
-  CancelableOperation<void>? _operation;
+  void start(void Function() onGameOver) =>
+      compute(_listen, null).then((_) => onGameOver());
+}
 
-  void start(void Function() onGameOver) {
-    _operation?.cancel();
-    _operation = CancelableOperation.fromFuture(
-      Future<void>.delayed(const Duration(seconds: 10)),
-    ).then((_) => onGameOver());
-  }
+Future<void> _listen(dynamic _) async {
+  try {
+    useLocalLibrary(CPU_ARCHITECTURE.arm64);
 
-  void stop() {
-    _operation?.cancel();
+    final gpio = GPIO(26, GPIOdirection.gpioDirOut);
+
+    sleep(const Duration(seconds: 1));
+
+    while (true) {
+      if (!gpio.read()) {
+        break;
+      }
+      sleep(const Duration(milliseconds: 10));
+    }
+  } on Object catch (e, stacktrace) {
+    _logger.severe('Failed to check game over GPIO.', e, stacktrace);
+    sleep(const Duration(seconds: 3));
   }
 }
