@@ -31,6 +31,8 @@ Future<void> _listen(dynamic _) async {
       }
       sleep(const Duration(milliseconds: 10));
     }
+
+    gpio.dispose();
   } on Object catch (e, stacktrace) {
     _logger.severe('Failed to check game over GPIO.', e, stacktrace);
     sleep(const Duration(seconds: 3));
