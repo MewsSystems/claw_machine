@@ -21,7 +21,7 @@ Future<void> _listen(dynamic _) async {
   try {
     useLocalLibrary(CPU_ARCHITECTURE.arm64);
 
-    final gpio = GPIO(26, GPIOdirection.gpioDirOut);
+    final gpio = GPIO(21, GPIOdirection.gpioDirOut);
 
     sleep(const Duration(seconds: 1));
 
