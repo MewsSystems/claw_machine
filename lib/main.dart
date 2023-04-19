@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:logging/logging.dart';
 
 import 'di.dart';
 import 'game/bl/game_bloc.dart';
@@ -14,6 +15,8 @@ Future<void> main() async {
   DartPluginRegistrant.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
+
+  Logger.root.onRecord.listen(print);
 
   runApp(const ClawMachineApp());
 }

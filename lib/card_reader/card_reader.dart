@@ -2,9 +2,12 @@ import 'package:dart_periphery/dart_periphery.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logging/logging.dart';
 import 'package:ndef/ndef.dart';
 
 import '../di.dart';
+
+final _logger = Logger((CardReader).toString());
 
 @Injectable(env: [envRPi])
 class CardReader {
@@ -64,8 +67,12 @@ List<NDEFRecord>? _scan(dynamic _) {
       ..removeAt(0)
       ..removeLast();
 
+    _logger.info('Read card: $result');
+
     return decodeRawNdefMessage(Uint8List.fromList(result));
-  } on Object {
+  } on Object catch (e) {
+    _logger.info('Failed to read card: $e');
+
     return null;
   }
 }
