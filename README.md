@@ -1,5 +1,7 @@
 # claw_machine
 
+- [The story of the claw machine](https://developers.mews.com/event-booth-story/)
+
 Claw machine controller for Raspberry Pi.
 
 ## Dependencies Graph
