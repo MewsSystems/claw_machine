@@ -13,21 +13,21 @@ final _logger = Logger((GameStarter).toString());
 class GameStarter {
   GameStarter() {
     try {
-      useLocalLibrary(CPU_ARCHITECTURE.arm64);
+      useLocalLibrary(CpuArchitecture.arm64);
       GPIO(4, GPIOdirection.gpioDirOut)
         ..write(true)
         ..dispose();
-    } on Object catch (e, stacktrace) {
-      _logger.severe('Failed to initialize.', e, stacktrace);
+    } on Object catch (error, stacktrace) {
+      _logger.severe('Failed to initialize.', error, stacktrace);
     }
   }
 
   void start() => compute(_startGame, null);
 }
 
-Future<void> _startGame(dynamic _) async {
+void _startGame(dynamic _) {
   try {
-    useLocalLibrary(CPU_ARCHITECTURE.arm64);
+    useLocalLibrary(CpuArchitecture.arm64);
 
     final gpio = GPIO(4, GPIOdirection.gpioDirOut)..write(false);
     sleep(const Duration(milliseconds: 10));
@@ -38,7 +38,7 @@ Future<void> _startGame(dynamic _) async {
     gpio
       ..write(true)
       ..dispose();
-  } on Object catch (e, stacktrace) {
-    _logger.severe('Failed to start game.', e, stacktrace);
+  } on Object catch (error, stacktrace) {
+    _logger.severe('Failed to start game.', error, stacktrace);
   }
 }

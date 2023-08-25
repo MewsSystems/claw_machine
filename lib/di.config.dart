@@ -26,7 +26,7 @@ const String _simulator = 'simulator';
 const String _rpi = 'rpi';
 
 extension GetItInjectableX on _i1.GetIt {
-  // initializes the registration of main-scope dependencies inside of GetIt
+// initializes the registration of main-scope dependencies inside of GetIt
   Future<_i1.GetIt> init({
     String? environment,
     _i2.EnvironmentFilter? environmentFilter,
@@ -38,7 +38,7 @@ extension GetItInjectableX on _i1.GetIt {
     );
     final appModule = _$AppModule();
     gh.factory<_i3.CardReader>(
-      () => _i4.StubCardReader(),
+      () => const _i4.StubCardReader(),
       registerFor: {_simulator},
     );
     gh.factory<_i3.CardReader>(
@@ -46,11 +46,11 @@ extension GetItInjectableX on _i1.GetIt {
       registerFor: {_rpi},
     );
     gh.factory<_i5.GameOverListener>(
-      () => _i6.StubGameOverListener(),
+      () => const _i6.StubGameOverListener(),
       registerFor: {_simulator},
     );
     gh.factory<_i5.GameOverListener>(
-      () => _i5.GameOverListener(),
+      () => const _i5.GameOverListener(),
       registerFor: {_rpi},
     );
     gh.factory<_i7.GameStarter>(
@@ -58,7 +58,7 @@ extension GetItInjectableX on _i1.GetIt {
       registerFor: {_rpi},
     );
     gh.factory<_i7.GameStarter>(
-      () => _i8.StubGameStarter(),
+      () => const _i8.StubGameStarter(),
       registerFor: {_simulator},
     );
     await gh.factoryAsync<_i9.SharedPreferences>(

@@ -7,6 +7,7 @@ import 'di.config.dart';
 final sl = GetIt.instance;
 
 @InjectableInit(preferRelativeImports: false)
+// ignore: avoid-unnecessary-futures, future proof
 Future<void> configureDependencies() async => sl.init(environment: environment);
 
 const envSimulator = 'simulator';
@@ -16,6 +17,8 @@ const environment = String.fromEnvironment('env', defaultValue: envSimulator);
 
 @module
 abstract class AppModule {
+  const AppModule();
+
   @preResolve
   Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
 }

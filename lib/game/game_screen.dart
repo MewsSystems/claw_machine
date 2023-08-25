@@ -42,26 +42,28 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) => BlocListener<GameBloc, GameState>(
-        listener: (context, state) => state.mapOrNull(
-          gameStarted: (_) {
-            _gameStarter.start();
-          },
-        ),
+        listener: (context, state) {
+          switch (state) {
+            case GameStarted():
+              _gameStarter.start();
+            default:
+              break;
+          }
+        },
         child: BlocBuilder<GameBloc, GameState>(
           builder: (context, state) => Screen(
-            color: state.maybeMap(
-              noAttemptsLeft: (_) => noGamesColor,
-              failure: (_) => errorColor,
-              orElse: () => primaryColor,
-            ),
-            child: state.map(
-              waiting: (_) => const WaitingScreen(),
-              processing: (_) => const WaitingScreen(),
-              failure: (_) => const FailureScreen(),
-              gameStarted: (state) =>
-                  GameStartedScreen(attempts: state.attemptsLeft),
-              noAttemptsLeft: (_) => const AttemptsScreen(attempts: 0),
-            ),
+            color: switch (state) {
+              NoAttemptsLeft() => noGamesColor,
+              Failure() => errorColor,
+              _ => primaryColor,
+            },
+            child: switch (state) {
+              Waiting() || Processing() => const WaitingScreen(),
+              Failure() => const FailureScreen(),
+              GameStarted(:final attemptsLeft) =>
+                GameStartedScreen(attempts: attemptsLeft),
+              NoAttemptsLeft() => const AttemptsScreen(attempts: 0),
+            },
           ),
         ),
       );

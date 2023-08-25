@@ -8,6 +8,8 @@ import 'card_reader.dart';
 
 @Injectable(as: CardReader, env: [envSimulator])
 class StubCardReader implements CardReader {
+  const StubCardReader();
+
   @override
   Future<void> start(ValueSetter<IList<NDEFRecord>> onScanned) async {}
 

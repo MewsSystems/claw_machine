@@ -29,7 +29,7 @@ class CardReader {
 
 List<NDEFRecord>? _scan(dynamic _) {
   try {
-    useLocalLibrary(CPU_ARCHITECTURE.arm64);
+    useLocalLibrary(CpuArchitecture.arm64);
     final p = PN532(pn532ProtocolImpl: PN532I2CImpl())..setSamConfiguration();
 
     final uid = p.getPassivTargetId();
@@ -70,8 +70,8 @@ List<NDEFRecord>? _scan(dynamic _) {
     _logger.info('Read card: $result');
 
     return decodeRawNdefMessage(Uint8List.fromList(result));
-  } on Object catch (e) {
-    _logger.info('Failed to read card: $e');
+  } on Object catch (error) {
+    _logger.info('Failed to read card: $error');
 
     return null;
   }

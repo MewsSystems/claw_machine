@@ -16,7 +16,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
 
-  Logger.root.onRecord.listen(print);
+  Logger.root.onRecord.listen((it) => debugPrint(it.toString()));
 
   runApp(const ClawMachineApp());
 }
@@ -40,8 +40,8 @@ class ClawMachineApp extends StatelessWidget {
                     displayColor: textColor,
                   ),
             ),
-            home: Stack(
-              children: const [
+            home: const Stack(
+              children: [
                 GameScreen(),
                 if (environment == envSimulator)
                   Positioned(

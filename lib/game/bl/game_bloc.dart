@@ -10,7 +10,7 @@ import '../../game_over_listener/game_over_listener.dart';
 part 'game_bloc.freezed.dart';
 
 @freezed
-class GameEvent with _$GameEvent {
+sealed class GameEvent with _$GameEvent {
   const factory GameEvent.scanned(IList<NDEFRecord> records) = Scanned;
 
   const factory GameEvent.reset(String code) = Reset;
@@ -19,7 +19,7 @@ class GameEvent with _$GameEvent {
 }
 
 @freezed
-class GameState with _$GameState {
+sealed class GameState with _$GameState {
   const factory GameState.waiting() = Waiting;
 
   const factory GameState.processing() = Processing;
@@ -44,11 +44,12 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   final SharedPreferences _prefs;
   final GameOverListener _gameOverListener;
 
-  EventHandler<GameEvent, GameState> get _handler => (event, emit) => event.map(
-        scanned: (event) => _handleScanned(event, emit),
-        finished: (event) => _handleFinished(event, emit),
-        reset: (event) => _handleReset(event, emit),
-      );
+  EventHandler<GameEvent, GameState> get _handler =>
+      (event, emit) => switch (event) {
+            Scanned() => _handleScanned(event, emit),
+            Finished() => _handleFinished(event, emit),
+            Reset() => _handleReset(event, emit),
+          };
 
   Future<void> _handleScanned(Scanned event, Emitter<GameState> emit) async {
     if (state is! Waiting) return;
@@ -63,7 +64,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
 
     final firstRecord = event.records[0];
     if (firstRecord is TextRecord && firstRecord.text == 'iddqd') {
-      await _emitStarted(emit, attemptsLeft: null);
+      _emitStarted(emit, attemptsLeft: null);
 
       return;
     }
@@ -95,11 +96,11 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       }
       await _prefs.setInt(text, attemptsLeft - 1);
 
-      await _emitStarted(emit, attemptsLeft: attemptsLeft);
+      _emitStarted(emit, attemptsLeft: attemptsLeft);
     }
   }
 
-  Future<void> _handleFinished(Finished _, Emitter<GameState> emit) async {
+  void _handleFinished(Finished _, Emitter<GameState> emit) {
     if (state is! GameStarted) return;
 
     emit(const GameState.waiting());
@@ -115,10 +116,10 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     emit(const GameState.waiting());
   }
 
-  Future<void> _emitStarted(
+  void _emitStarted(
     Emitter<GameState> emit, {
     required int? attemptsLeft,
-  }) async {
+  }) {
     emit(GameState.gameStarted(attemptsLeft: attemptsLeft));
 
     _gameOverListener.start(() {

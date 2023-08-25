@@ -11,15 +11,15 @@ final _logger = Logger((GameOverListener).toString());
 
 @Injectable(env: [envRPi])
 class GameOverListener {
-  GameOverListener();
+  const GameOverListener();
 
   void start(void Function() onGameOver) =>
       compute(_listen, null).then((_) => onGameOver());
 }
 
-Future<void> _listen(dynamic _) async {
+void _listen(dynamic _) {
   try {
-    useLocalLibrary(CPU_ARCHITECTURE.arm64);
+    useLocalLibrary(CpuArchitecture.arm64);
 
     final gpio = GPIO(21, GPIOdirection.gpioDirOut);
 
@@ -33,8 +33,8 @@ Future<void> _listen(dynamic _) async {
     }
 
     gpio.dispose();
-  } on Object catch (e, stacktrace) {
-    _logger.severe('Failed to check game over GPIO.', e, stacktrace);
+  } on Object catch (error, stacktrace) {
+    _logger.severe('Failed to check game over GPIO.', error, stacktrace);
     sleep(const Duration(seconds: 3));
   }
 }
