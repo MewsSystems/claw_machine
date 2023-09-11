@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:dart_periphery/dart_periphery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +13,11 @@ import 'game/widgets/styles.dart';
 import 'simulator/simulator.dart';
 
 Future<void> main() async {
+  if (environment == envRPi) {
+    setCPUarchitecture(CpuArchitecture.arm64);
+    setCustomLibrary('/home/pi/libperiphery_arm64.so');
+  }
+
   DartPluginRegistrant.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();

@@ -14,8 +14,17 @@ class CardReader {
   bool _isDisposed = false;
 
   Future<void> start(ValueSetter<IList<NDEFRecord>> onScanned) async {
+    _logger.info('Starting.');
+    final p = PN532(
+      pn532ProtocolImpl: PN532I2CImpl(
+        resetPin: 20,
+        hardwareRequestPin: 16,
+      ),
+    )..setSamConfiguration();
+
     while (!_isDisposed) {
-      final records = await compute(_scan, null);
+      await Future<void>.delayed(const Duration(seconds: 1));
+      final records = _scan(p);
       if (records != null && !_isDisposed) {
         onScanned(records.toIList());
       }
@@ -27,15 +36,14 @@ class CardReader {
   }
 }
 
-List<NDEFRecord>? _scan(dynamic _) {
+List<NDEFRecord>? _scan(PN532 p) {
   try {
-    useLocalLibrary(CpuArchitecture.arm64);
-    final p = PN532(pn532ProtocolImpl: PN532I2CImpl())..setSamConfiguration();
-
+    _logger.info('Waiting for card.');
     final uid = p.getPassivTargetId();
 
     final List<int> result = [];
 
+    _logger.info('Reading card.');
     for (int i = 4; i < 10; i++) {
       if ((i + 1) % 4 == 0) {
         continue;
