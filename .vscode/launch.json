@@ -7,7 +7,11 @@
         {
             "name": "claw_machine",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": [
+                "--dart-define",
+                "env=simulator"
+            ]
         },
         {
             "name": "claw_machine (profile mode)",

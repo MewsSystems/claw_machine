@@ -13,7 +13,7 @@ Future<void> configureDependencies() async => sl.init(environment: environment);
 const envSimulator = 'simulator';
 const envRPi = 'rpi';
 
-const environment = String.fromEnvironment('env', defaultValue: envSimulator);
+const environment = String.fromEnvironment('env', defaultValue: envRPi);
 
 @module
 abstract class AppModule {
