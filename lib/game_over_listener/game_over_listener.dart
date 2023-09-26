@@ -16,12 +16,13 @@ class GameOverListener {
 Future<void> _listen() async {
   try {
     _logger.info('Waiting for game over GPIO.');
-    final gpio = GPIO(21, GPIOdirection.gpioDirOut);
+    final gpio = GPIO(21, GPIOdirection.gpioDirIn);
 
     await Future<void>.delayed(const Duration(seconds: 1));
 
     while (true) {
       if (!gpio.read()) {
+        _logger.info('Game over GPIO detected.');
         break;
       }
       await Future<void>.delayed(const Duration(milliseconds: 10));
