@@ -56,7 +56,7 @@ class ClawMachineApp extends StatelessWidget {
                     bottom: 0,
                     width: 200,
                     child: Simulator(),
-                  )
+                  ),
               ],
             ),
           ),

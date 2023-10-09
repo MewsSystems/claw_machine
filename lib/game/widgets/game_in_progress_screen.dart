@@ -20,7 +20,7 @@ class GameInProgressScreen extends StatelessWidget {
               height: 233.r,
               child: Assets.animations.claw.rive(),
             ),
-          )
+          ),
         ],
       );
 }

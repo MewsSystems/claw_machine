@@ -7,7 +7,6 @@ import 'di.config.dart';
 final sl = GetIt.instance;
 
 @InjectableInit(preferRelativeImports: false)
-// ignore: avoid-unnecessary-futures, future proof
 Future<void> configureDependencies() async => sl.init(environment: environment);
 
 const envSimulator = 'simulator';
