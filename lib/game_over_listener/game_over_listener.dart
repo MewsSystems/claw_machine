@@ -10,7 +10,9 @@ final _logger = Logger((GameOverListener).toString());
 class GameOverListener {
   const GameOverListener();
 
-  void start(void Function() onGameOver) => _listen().then((_) => onGameOver());
+  void start(void Function() onGameOver) => _listen()
+      .then((_) => onGameOver())
+      .timeout(const Duration(minutes: 1), onTimeout: onGameOver);
 }
 
 Future<void> _listen() async {

@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -38,7 +39,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     this._prefs,
     this._gameOverListener,
   ) : super(const GameState.waiting()) {
-    on<GameEvent>(_handler);
+    on<GameEvent>(_handler, transformer: droppable());
   }
 
   final SharedPreferences _prefs;
@@ -64,7 +65,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
 
     final firstRecord = event.records[0];
     if (firstRecord is TextRecord && firstRecord.text == 'iddqd') {
-      _emitStarted(emit, attemptsLeft: null);
+      await _emitStarted(emit, attemptsLeft: null);
 
       return;
     }
@@ -96,7 +97,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       }
       await _prefs.setInt(text, attemptsLeft - 1);
 
-      _emitStarted(emit, attemptsLeft: attemptsLeft);
+      await _emitStarted(emit, attemptsLeft: attemptsLeft);
     }
   }
 
@@ -116,11 +117,13 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     emit(const GameState.waiting());
   }
 
-  void _emitStarted(
+  Future<void> _emitStarted(
     Emitter<GameState> emit, {
     required int? attemptsLeft,
-  }) {
+  }) async {
     emit(GameState.gameStarted(attemptsLeft: attemptsLeft));
+
+    await Future<void>.delayed(const Duration(seconds: 3));
 
     _gameOverListener.start(() {
       if (isClosed) return;
